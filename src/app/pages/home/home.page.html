@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <!-- <ion-title class="ion-title-1" slot="end" style="margin-right: 3px"></ion-title> -->
+    <ion-title  slot="end">
+      <span style="display: flex; flex-direction: row !important; align-items: center; margin-right: 1px; justify-content: flex-end">
+        <p class="p-bienvenidos">
+          Bienvenido: {{usuario.P_NOMBRE}} {{usuario.AP_PATERNO}}
+        </p>
+        <section>
+          <img alt="logo" class="tamanio-logo" src="../../../assets/icon/LogoLSG.jpg">
+          
+        </section>
+
+      </span>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+<ion-content>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button (click)="logout()">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        <ion-label>Cerrar sesión</ion-label>
+      </ion-tab-button>
+      
+
+      <ion-tab-button tab="perfil/{{usuario.RUT}}">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+
+      
+        <ion-tab-button tab="administrador" *ngIf="usuario.ID_TIPO_PERSONA==4">
+          <ion-icon name="file-tray-stacked-outline"></ion-icon>
+          <ion-label>Admin</ion-label>
+        </ion-tab-button>
+
+      
+      <ion-tab-button tab="apoderado/{{usuario.RUT}}" *ngIf="usuario.ID_TIPO_PERSONA==2">
+        <ion-icon name="people-outline"></ion-icon>
+        <ion-label>Apoderado</ion-label>
+      </ion-tab-button>
+      
+      <ion-tab-button tab="directivo" *ngIf="usuario.ID_TIPO_PERSONA==1">
+        <ion-icon name="school-outline"></ion-icon>
+        <ion-label>Directivo</ion-label>
+      </ion-tab-button>
+
+
+
+      
+
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-content>

@@ -1,0 +1,83 @@
+.ion-content-2 {
+    --background: none;
+    background-image: url('../../../assets/icon/fondo1.png') !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .span-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button-text {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .button-color {
+    --background-hover: rgb(219, 187, 2) !important;
+  }
+  
+  td,
+  th {
+    padding-right: 50px !important;
+  }
+  
+  .responsive-table {
+    overflow: scroll;
+    width: 80%;
+  }
+  
+  .button-color {
+    background-color: rgb(9, 0, 138); /* Color inicial del botón */
+    transition: background-color 0.3s; /* Transición suave */
+  }
+  
+  .button-color:hover {
+    background-color: rgb(219, 187, 2) !important; /* Color al pasar el cursor */
+  }
+  
+  .custom-button {
+    --background: rgb(9, 0, 138)!important; /* Color inicial del botón */
+    --background-hover: rgb(219, 187, 2)!important; /* Color al pasar el cursor */
+    --color: white; /* Color del texto */
+    --font-weight: bold;
+  }
+
+  .square-button {
+    flex: 1 0 100px;
+    max-width: 100px;
+    height: 100px;
+    border-radius: 0;
+    background-color: rgb(9, 0, 138);
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .square-button:hover,
+  .square-button:focus,
+  .square-button:active {
+    background-color: rgb(219, 187, 2);
+  }
+  
+  .custom-button {
+    --background: rgb(9, 0, 138) !important; /* Color inicial del botón */
+    --background-hover: rgb(219, 187, 2) !important; /* Color al pasar el cursor */
+    --color: white; /* Color del texto */
+    --font-weight: bold;
+  }
+  
+  

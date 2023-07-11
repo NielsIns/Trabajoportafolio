@@ -1,0 +1,225 @@
+
+
+<ion-content class="ion-content-2 ion-content-1"  [fullscreen]="true">
+  <div>
+    <ion-card class="ion-card-ag">
+      <ion-card-header>
+        <ion-card-title style="text-align: center;">Administrador</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div>
+          <span class="span-column">
+            <ion-button color="dark" (click)="btnListarAlumno()">
+              Administrar Alumnos
+            </ion-button>
+            <ion-button color="dark" (click)="btnListarCurso()">
+              Administrar Cursos
+            </ion-button>
+          </span>
+  
+        </div>
+  
+        <section *ngIf="agregarAlumno">
+          <form [formGroup]="user">
+            <ion-item>
+              <ion-label position="stacked">Tipo Usuario</ion-label>
+              <ion-input type="text" placeholder="Ingrese nombre de la asignatura" formControlName="tipo_usuario"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Rut</ion-label>
+              <ion-input type="text" placeholder="Ingrese rut" formControlName="rut"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Primer Nombre</ion-label>
+              <ion-input type="text" placeholder="Ingrese nombres" formControlName="pnombre"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Segundo Nombre</ion-label>
+              <ion-input type="text" placeholder="Ingrese nombres" formControlName="snombre"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Apellido Paterno</ion-label>
+              <ion-input type="text" placeholder="Ingrese apellido paterno" formControlName="ap_paterno"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Apellido Materno</ion-label>
+              <ion-input type="text" placeholder="Ingrese apellido materno" formControlName="ap_materno"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Fecha Nacimiento</ion-label>
+              <ion-input type="text" placeholder="Ingrese fecha de nacimiento" formControlName="fecha_nac"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Teléfono</ion-label>
+              <ion-input type="text" placeholder="Ingrese teléfono" formControlName="fono"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Dirección</ion-label>
+              <ion-input type="text" placeholder="Ingrese dirección" formControlName="direccion"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Correo Electronico</ion-label>
+              <ion-input type="text" placeholder="Ingrese correo electronico" formControlName="correo"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Género</ion-label>
+              <ion-input type="text" placeholder="Seleccione género" formControlName="genero"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Comuna</ion-label>
+              <ion-input type="text" placeholder="Seleccione comuna" formControlName="comuna"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Patología </ion-label>
+              <ion-input type="text" placeholder="Ingrese la patologia del alumno" formControlName="patologia"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Certificado de notas </ion-label>
+              <ion-input type="text" placeholder="Ingrese el certifiado de notas del alumno" formControlName="cert_notas"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+    
+            <ion-button>
+              Registrar
+            </ion-button>
+    
+          </form>
+        </section>
+  
+  
+        <hr>
+  
+        <section *ngIf="agregarCurso">
+  
+          <form [formGroup]="curso">
+            <ion-item>
+              <ion-label position="stacked">Nivel </ion-label>
+              <ion-input type="text" placeholder="Ingrese el nivel del curso" formControlName="nivel"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Letra </ion-label>
+              <ion-input type="text" placeholder="Ingrese la letra del curso" formControlName="letra"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Cupo </ion-label>
+              <ion-input type="text" placeholder="Ingrese el cupo del curso" formControlName="cupo"></ion-input>
+              <ion-note slot="error">Campo Obligatorio</ion-note>
+            </ion-item>
+          </form>
+        </section>
+  
+        <section *ngIf="listarCurso"  style="display:inline-flex; justify-content: center; flex-direction: column !important; align-items: center; text-align: center; width: 100%; height: 100%;">
+          <span style="margin-top: 20px; margin-bottom: 20px">
+            <h1>Listar Cursos</h1>
+          </span>
+          <section class="responsive-table"  style="text-align: center;">
+  
+            <table style="width: 100%; ">
+              <tr >
+                <th>Nombre</th>
+                <th>Nivel</th>
+                <th>Letra</th>
+                <th>Cupo</th>
+                <th>Opciones</th>
+              </tr>
+              <tr >
+                <td >
+                  <span>  </span>
+                </td>
+                <td >
+                  <span>  </span>
+                </td>
+                <td >
+                  <span>  </span>
+                </td>
+                <td>
+                  <span> </span>
+                </td>
+                <td style="display:flex; flex-direction: column; text-align: center; justify-content: center; align-items: center;">
+                  <ion-button style="--border-radius: 50%; width: 50px; " color="danger" ><ion-icon name="trash-outline"></ion-icon></ion-button>
+                  <ion-button style="--border-radius: 50%; width: 50px; " color="warning"><ion-icon name="search-outline"></ion-icon></ion-button>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <section>
+                    <ion-button color="dark" (click)="btnAgregarCurso()"><ion-icon name="add-outline"></ion-icon></ion-button>
+                  </section>
+                </td>
+                <td></td>
+              </tr>
+  
+    
+                
+              
+            </table>
+          </section>
+        </section>
+        <section *ngIf="listarAlumno"  style="display:inline-flex; justify-content: center; flex-direction: column !important; align-items: center; text-align: center; width: 100%; height: 100%;">
+          <span style="margin-top: 20px; margin-bottom: 20px">
+            <h1>Listar Alumnos</h1>
+          </span>
+          <section class="responsive-table"  style="text-align: center;">
+  
+            <table style="width: 100%; ">
+              <tr >
+                <th>Rut</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Opciones</th>
+              </tr>
+              <tr >
+                <td >
+                  <span>  </span>
+                </td>
+                <td >
+                  <span>  </span>
+                </td>
+                <td>
+                  <span> </span>
+                </td>
+                <td style="display:flex; flex-direction: column; text-align: center; justify-content: center; align-items: center;">
+                  <ion-button style="--border-radius: 50%; width: 50px; " color="danger" ><ion-icon name="trash-outline"></ion-icon></ion-button>
+                  <ion-button style="--border-radius: 50%; width: 50px; " color="warning"><ion-icon name="search-outline"></ion-icon></ion-button>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <section>
+                    <ion-button color="dark" (click)="btnAgregarAlumno()"><ion-icon name="add-outline"></ion-icon></ion-button>
+                  </section>
+                </td>
+                <td></td>
+              </tr>
+  
+    
+                
+              
+            </table>
+          </section>
+        </section>
+        
+        
+        
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

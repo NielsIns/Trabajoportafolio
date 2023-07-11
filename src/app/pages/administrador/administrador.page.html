@@ -1,0 +1,774 @@
+<ion-content class="ion-content-2 ion-content-1" [fullscreen]="true">
+  <div>
+
+    <ion-card class="ion-card-ag">
+      <ion-card-header>
+        <ion-card-title style="text-align: center; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)" class="tamnio-letra">Administrador</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div>
+          <span class="span-row">
+            <div class="button-container">
+              <div class="button-wrapper">
+                <ion-button (click)="btnListarDirec()" class="square-button button-color">
+                  <ion-icon name="person"></ion-icon>
+                </ion-button>
+                <span><i>Administrar Personas</i></span>
+
+              </div>
+            </div>
+          
+            <div class="button-container">
+              <div class="button-wrapper">
+                <ion-button (click)="btnListarCred()" class="square-button button-color">
+                  <ion-icon name="document"></ion-icon>
+                </ion-button>
+                <span><i>Administrar Credenciales</i></span>
+              </div>
+            </div>
+          
+            <div class="button-container">
+              <div class="button-wrapper">
+                <ion-button (click)="btnListarCol()" class="square-button button-color">
+                  <ion-icon name="business"></ion-icon>
+                </ion-button>
+                <span><i>Administrar Colegios</i></span>
+              </div>
+            </div>
+          </span>
+          
+          
+          
+          
+          
+        </div>
+
+        <section>
+
+          <section *ngIf="searchCreden">
+            <form [formGroup]="credencial" (ngSubmit)="anadirUser()">
+              <ion-item [disabled]="true">
+                <ion-label position="floating">Rut</ion-label>
+                <ion-input placeholder="Ej: 11.111.111-1"formControlName="RUT" [disabled]="true"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Nombre Usuario</ion-label>
+                <ion-input placeholder="Ingrese su nombre de usuario" formControlName="NOM_USUARIO"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input placeholder="Ingrese su contraseña" formControlName="CONTRASENIA"></ion-input>
+              </ion-item>
+            </form>
+            <ion-button (click)="actualizarCredencial()">
+              Modificar
+            </ion-button>
+
+          </section>
+          <section *ngIf="anadirPerso">
+            <form *ngIf="user.value.ID_TIPO_PERSONA != '3'" [formGroup]="credencial" (ngSubmit)="anadirUser()">
+              <ion-item>
+                <ion-label position="floating">Nombre Usuario</ion-label>
+                <ion-input placeholder="Ingrese su nombre de usuario" formControlName="NOM_USUARIO"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input type="password" placeholder="Ingrese su contraseña" formControlName="CONTRASENIA"></ion-input>
+              </ion-item>
+            </form>
+
+            <form [formGroup]="user" (ngSubmit)="anadirUser()">
+              <ion-item>
+                <ion-label position="stacked">Rut</ion-label>
+                <ion-input type="text" placeholder="Ej: 11.111.111-1" formControlName="RUT"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Primer Nombre</ion-label>
+                <ion-input type="text" placeholder="Ej: John " formControlName="P_NOMBRE"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Segundo Nombre</ion-label>
+                <ion-input type="text" placeholder="Ej: Gerónimo" formControlName="S_NOMBRE"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Apellido Paterno</ion-label>
+                <ion-input type="text" placeholder="Ej: Doe" formControlName="AP_PATERNO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Apellido Materno</ion-label>
+                <ion-input type="text" placeholder="Ej: Pérez" formControlName="AP_MATERNO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Fecha Nacimiento</ion-label>
+                <ion-input type="text" placeholder="Ej: 11/12/1999"
+                  formControlName="FECHA_NAC"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Teléfono</ion-label>
+                <ion-input type="number" placeholder="Ej:987656571" formControlName="TELEFONO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Dirección</ion-label>
+                <ion-input type="text" placeholder="Ej: La Colonia 0114" formControlName="DIRECCION"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Correo Electronico</ion-label>
+                <ion-input type="text" placeholder="Ej: correo@correo.com" formControlName="CORREO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_PERFIL" interface="popover" placeholder="Selecciona un perfil">
+                    <span *ngFor="let p of perfiles">
+                      <ion-select-option value="{{p.ID_PERFIL}}">
+                        
+                        {{p.NOMBRE}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_GENERO" interface="popover" placeholder="Selecciona un género">
+                    <span *ngFor="let g of generos">
+                      <ion-select-option value="{{g.ID_GENERO}}">
+                        
+                        {{g.TIPO_GENERO}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_COMUNA" interface="popover" placeholder="Selecciona una comuna">
+                    <span *ngFor="let c of comunas">
+                      <ion-select-option value="{{c.ID_COMUNA}}">
+                        
+                        {{c.NOM_COMUNA}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_TIPO_PERSONA" interface="popover" placeholder="Selecciona un tipo de persona">
+                    <span *ngFor="let tp of tipos_personas" >
+                      <ion-select-option value="{{tp.ID_TIPO_PERSONA}}" >
+                        
+                        {{tp.DESCRIPCION}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-item *ngIf="user.value.ID_TIPO_PERSONA=='1'">
+                <ion-label position="stacked">Sueldo</ion-label>
+                <ion-input type="number" placeholder="Ej: 100000" formControlName="SUELDO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-list *ngIf="user.value.ID_TIPO_PERSONA== '1' || user.value.ID_TIPO_PERSONA== '2' || user.value.ID_TIPO_PERSONA== '4'">
+                <ion-item>
+                  <ion-select formControlName="ID_PROFESION" interface="popover" placeholder="Selecciona una profesión">
+                    <span *ngFor="let p of profesiones">
+                      <ion-select-option value="{{p.ID_PROFESION}}">
+
+                        {{p.NOM_PROF}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '1'">
+                <ion-item>
+                  <ion-select formControlName="ID_CARGO" interface="popover" placeholder="Selecciona un cargo">
+                    <span *ngFor="let c of cargos">
+                      <ion-select-option value="{{c.ID_CARGO}}">
+
+                        {{c.NOM_CARGO}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '3'">
+                <ion-item>
+                  <ion-select formControlName="ID_PATOLOGIA" interface="popover" placeholder="Selecciona una patología">
+                    <span *ngFor="let p of patologias">
+                      <ion-select-option value="{{p.ID_PATOLOGIA}}">
+
+                        {{p.NOM_PATOLOGIA}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '3'">
+                <ion-item>
+                  <ion-select formControlName="RUT_APO" interface="popover" placeholder="Seleccione un apoderado">
+                    <span *ngFor="let p of listaPersonasFilterApoderado">
+                      <ion-select-option value="{{p[0]}}">
+
+                        {{p[1]}} {{p[3]}} {{p[0]}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '3' || user.value.ID_TIPO_PERSONA== '1'">
+                <ion-item>
+                  <ion-select formControlName="COLEGIO_ACTUAL" interface="popover" placeholder="Seleccione un colegio">
+                    <span *ngFor="let c of colegios">
+                      <ion-select-option value="{{c[0]}}">
+
+                        {{c[1]}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list> 
+              
+              <ion-item  *ngIf="user.value.ID_TIPO_PERSONA== '3'">
+                <ion-label position="stacked">Certificado de notas</ion-label>
+                <ion-input type="file" (change)="onFileSelect($event)"  placeholder="Ej: CERTIFICADO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+
+            </form>
+            
+            <ion-button class="button-color" (click)="anadirUser()">
+              Registrar
+            </ion-button>
+            
+
+            
+
+          </section>
+          <section *ngIf="anadirCol">
+
+            <form [formGroup]="colegio" (ngSubmit)="anadirColegio()">
+              <ion-item>
+                <ion-label position="stacked">Nombre colegio</ion-label>
+                <ion-input type="text" placeholder="Ej: Liceo San Gerónimo"
+                  formControlName="NOM_COLEGIO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Direccion</ion-label>
+                <ion-input type="text" placeholder="Ej: La Colonia 0114"
+                  formControlName="DIRECCION"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Teléfono</ion-label>
+                <ion-input type="text" placeholder="Ej: 987654321" formControlName="TELEFONO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Correo</ion-label>
+                <ion-input type="text" placeholder="Ej: correo@correo.com" formControlName="CORREO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+
+
+
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_COMUNA" interface="popover" placeholder="Selecciona una comuna">
+                    <span *ngFor="let c of comunas">
+                      <ion-select-option value="{{c.ID_COMUNA}}">
+
+                        {{c.NOM_COMUNA}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+
+              </ion-list>
+              
+              <ion-button type="submit" class="button-color" >
+                Registrar
+              </ion-button>
+              
+
+            </form>
+          </section>
+          <section *ngIf="searchColegio">
+
+            <form [formGroup]="colegio" (ngSubmit)="anadirColegio()">
+              <ion-item>
+                <ion-label position="stacked">Nombre colegio</ion-label>
+                <ion-input type="text" placeholder="Ej: Liceo San Gerónimo"
+                  formControlName="NOM_COLEGIO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Direccion</ion-label>
+                <ion-input type="text" placeholder="Ej: La Colonia 0114"
+                  formControlName="DIRECCION"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Teléfono</ion-label>
+                <ion-input type="text" placeholder="Ej: 987654321" formControlName="TELEFONO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Correo</ion-label>
+                <ion-input type="text" placeholder="Ej: correo@correo.com" formControlName="CORREO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+
+
+
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_COMUNA" interface="popover" placeholder="Selecciona una comuna" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let c of comunas">
+                      <ion-select-option value="{{c.ID_COMUNA}}">
+
+                        {{c.NOM_COMUNA}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+
+              </ion-list>
+              
+              <ion-button (click)="actualizarColegio()" class="button-color">
+                Modificar
+              </ion-button>
+              
+              
+
+            </form>
+          </section>
+          <section *ngIf="searchPerso">
+
+            <form [formGroup]="user" (ngSubmit)="anadirUser()">
+              <ion-item [disabled]="true">
+                <ion-label position="stacked">Rut</ion-label>
+                <ion-input type="text" placeholder="Ej: 11.111.111-1" formControlName="RUT"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Primer Nombre</ion-label>
+                <ion-input type="text" placeholder="Ej: John" formControlName="P_NOMBRE"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Segundo Nombre</ion-label>
+                <ion-input type="text" placeholder="Ej: Gerónimo" formControlName="S_NOMBRE"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Apellido Paterno</ion-label>
+                <ion-input type="text" placeholder="Ej: Doe" formControlName="AP_PATERNO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Apellido Materno</ion-label>
+                <ion-input type="text" placeholder="Ej: Pérez" formControlName="AP_MATERNO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Fecha Nacimiento</ion-label>
+                <ion-input type="text" placeholder="Ej: 11/12/1999"
+                  formControlName="FECHA_NAC"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Teléfono</ion-label>
+                <ion-input type="number" placeholder="Ej:987656571" formControlName="TELEFONO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Dirección</ion-label>
+                <ion-input type="text" placeholder="Ej: La Colonia 0114" formControlName="DIRECCION"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Correo Electronico</ion-label>
+                <ion-input type="text" placeholder="Ej: correo@correo.com" formControlName="CORREO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_PERFIL" interface="popover" placeholder="Selecciona un perfil" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let p of perfiles">
+                      <ion-select-option value="{{p.ID_PERFIL}}">
+                        
+                        {{p.NOMBRE}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_GENERO" interface="popover" placeholder="Selecciona un género" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let g of generos">
+                      <ion-select-option value="{{g.ID_GENERO}}">
+                        
+                        {{g.TIPO_GENERO}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_COMUNA" interface="popover" placeholder="Selecciona una comuna" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let c of comunas">
+                      <ion-select-option value="{{c.ID_COMUNA}}">
+                        
+                        {{c.NOM_COMUNA}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select formControlName="ID_TIPO_PERSONA" interface="popover" placeholder="Selecciona un tipo de persona" [compareWith]="compareTiposPersonaFn" >
+                    <span *ngFor="let tp of tipos_personas" >
+                      <ion-select-option value="{{tp.ID_TIPO_PERSONA}}" [attr.selected]="true ">
+                        
+                        {{tp.DESCRIPCION}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+                    
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-item *ngIf="user.value.ID_TIPO_PERSONA=='1'">
+                <ion-label position="stacked">Sueldo</ion-label>
+                <ion-input type="number" placeholder="Ej: 100000" formControlName="SUELDO"></ion-input>
+                <ion-note slot="error">Campo Obligatorio</ion-note>
+              </ion-item>
+              <ion-list *ngIf="user.value.ID_TIPO_PERSONA== '1' || user.value.ID_TIPO_PERSONA== '2' || user.value.ID_TIPO_PERSONA== '4' ">
+                <ion-item>
+                  <ion-select formControlName="ID_PROFESION" interface="popover" placeholder="Selecciona una profesión" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let p of profesiones">
+                      <ion-select-option value="{{p.ID_PROFESION}}">
+
+                        {{p.NOM_PROF}}
+
+                      </ion-select-option>
+                      
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="user.value.ID_TIPO_PERSONA== '1'">
+                <ion-item>
+                  <ion-select formControlName="ID_CARGO" interface="popover" placeholder="Selecciona un cargo" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let c of cargos">
+                      <ion-select-option value="{{c.ID_CARGO}}">
+
+                        {{c.NOM_CARGO}}
+                        
+                      </ion-select-option>
+                      
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '3'">
+                <ion-item>
+                  <ion-select formControlName="ID_PATOLOGIA" interface="popover" placeholder="Selecciona una patología" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let p of patologias">
+                      <ion-select-option value="{{p.ID_PATOLOGIA}}">
+
+                        {{p.NOM_PATOLOGIA}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '3'">
+                <ion-item>
+                  <ion-select formControlName="RUT_APO" interface="popover" placeholder="Seleccione un apoderado" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let p of listaPersonasFilterApoderado">
+                      <ion-select-option value="{{p[0]}}">
+
+                        {{p[1]}} {{p[3]}} {{p[0]}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-list  *ngIf="user.value.ID_TIPO_PERSONA== '3' || user.value.ID_TIPO_PERSONA== '1'">
+                <ion-item>
+                  <ion-select formControlName="COLEGIO_ACTUAL" interface="popover" placeholder="Seleccione un colegio" [compareWith]="compareTiposPersonaFn">
+                    <span *ngFor="let c of colegios">
+                      <ion-select-option value="{{c[0]}}">
+
+                        {{c[1]}}
+
+                      </ion-select-option>
+
+                    </span>
+
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-button (click)="actualizarPersona()" class="button-color">
+                Modificar
+              </ion-button>
+              
+              
+
+            </form>
+          </section>
+          <section *ngIf="listarDirec==true" style="display:inline-flex; justify-content: center; flex-direction: column !important; align-items: center; text-align: center; width: 100%; height: 100%;">
+            <section>
+              <form>
+                <div class="d-flex" *ngIf="filtroVisible">
+                  <div class="d-flex">
+                    <ion-list>
+                      <ion-item>
+                        <ion-select placeholder="Selecciona un tipo de usuario" interface="popover" (ionChange)="seleccionarTipoUsuario($event)">
+                          <ion-select-option *ngFor="let tipoUsuario of tipos_personas" [value]="tipoUsuario">{{ tipoUsuario.DESCRIPCION }}</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+
+                    </ion-list>
+
+                  </div>
+                  <ion-button colo="danger" (click)="onFiltrar()">&times;</ion-button>
+                </div>
+              </form>              
+            </section>
+            
+            
+
+            <span style="margin-top: 20px; margin-bottom: 20px">
+              <h1><b><i>Lista de Personas</i></b></h1>
+
+            </span>
+            <section class="responsive-table" style="text-align: center;">
+
+              <table style="width: 100%; ">
+                <tr>
+                  <th>Rut</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Opciones</th>
+                </tr>
+                <tr *ngFor="let per of listaPersonasFilter | slice: (paginaActualPersona - 1) * 10 : paginaActualPersona * 10">
+                  <td>
+                    <span> {{per[0]}} </span>
+                  </td>
+                  <td>
+                    <span> {{per[1]}} </span>
+                  </td>
+                  <td>
+                    <span> {{per[3]}} </span>
+                  </td>
+                  <td
+                    style="display:flex; flex-direction: column; text-align: center; justify-content: center; align-items: center;">
+                    <ion-button style="--border-radius: 50%; width: 50px; " color="danger"
+                      (click)="presentAlertBorrar(per[0])"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                    <ion-button style="--border-radius: 50%; width: 50px; " color="warning"
+                      (click)="buscarPersona(per[0])"><ion-icon name="search-outline"></ion-icon></ion-button>
+                  </td>
+                </tr>
+              </table>
+              <section style="display: flex; flex-direction: column; text-align: center; justify-content: center;">
+                    <section>
+                      <ion-button (click)="paraAnadirUser()" class="custom-button" style="background-color: rgb(9, 0, 138); transition: background-color 0.3s; border-radius: 0; display: flex; justify-content: center; align-items: center;">
+                        <ion-icon name="add-outline"></ion-icon>
+                      </ion-button>
+                      
+
+                    </section>
+                    <section style="display: flex; flex-direction: row; justify-content: center;">
+                      <ion-button (click)="paginaActualPersona = paginaActualPersona - 1" class="custom-button" [disabled]="paginaActualPersona === 1">
+                        Anterior
+                      </ion-button>
+                      <ion-button (click)="paginaActualPersona = paginaActualPersona + 1" class="custom-button" [disabled]="paginaActualPersona * 10 > listaPersonasFilter.length">
+                        Siguiente
+                      </ion-button>
+                    </section>
+                    <section style="display: flex; flex-direction: row; justify-content: center;">
+                      <ion-button (click)="onImprimir()" class="custom-button">Imprimir</ion-button>
+                      <ion-button (click)="onFiltrar()" class="custom-button">Filtrar</ion-button>
+                    </section>
+                    
+                    
+              </section>
+            </section>
+
+          </section>
+          <section *ngIf="listarCred == true" style="display:inline-flex; justify-content: center; flex-direction: column !important; align-items: center; text-align: center; width: 100%; height: 100%;">
+            <span style="margin-top: 20px; margin-bottom: 20px">
+              <h1><b><i>Lista de Credenciales</i></b></h1>
+            </span>
+            <section class="responsive-table" style="text-align: center;">
+              <table style="width: 100%;">
+                <tr>
+                  <th>Rut</th>
+                  <th>Nombre de usuario</th>
+                  <th>Opciones</th>
+                </tr>
+                <tr *ngFor="let cred of credenciales | slice: (paginaActualCred - 1) * 10 : paginaActualCred * 10">
+                  <td>
+                    <span>{{cred[0]}}</span>
+                  </td>
+                  <td>
+                    <span>{{cred[1]}}</span>
+                  </td>
+                  <td style="display:flex; flex-direction: column; text-align: center; justify-content: center; align-items: center;">
+                    <ion-button style="--border-radius: 50%; width: 50px;" color="danger" (click)="presentAlertBorrar(cred[0])">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button style="--border-radius: 50%; width: 50px;" color="warning" (click)="buscarCredencial(cred[0])">
+                      <ion-icon name="search-outline"></ion-icon>
+                    </ion-button>
+                  </td>
+                </tr>
+              </table>
+              <section style="display: flex; flex-direction: column; text-align: center; justify-content: center;">
+                <section style="display: flex; flex-direction: row; justify-content: center;">
+                  <ion-button [disabled]="paginaActualCred === 1" (click)="paginaActualCred = paginaActualCred - 1" class="custom-button">
+                    Anterior
+                  </ion-button>
+                  <ion-button (click)="paginaActualCred = paginaActualCred + 1" class="custom-button" [disabled]="paginaActualCred * 10 >= credenciales.length">
+                    Siguiente
+                  </ion-button>
+                </section>
+                <section style="display: flex; flex-direction: row; justify-content: center;">
+                  <ion-button (click)="onImprimirCreden()" class="custom-button">
+                    Imprimir
+                  </ion-button>
+                </section>
+              </section>
+            </section>
+          </section>
+
+          <section *ngIf="listarCol == true"
+          style="display:inline-flex; justify-content: center; flex-direction: column !important; align-items: center; text-align: center; width: 100%; height: 100%;">
+            <span style="margin-top: 20px; margin-bottom: 20px">
+              <h1><b><i>Lista de Colegios</i></b></h1>
+            </span>
+          <section class="responsive-table" style="text-align: center;">
+            <table style="width: 100%;">
+              <tr>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Comuna</th>
+                <th>Opciones</th>
+              </tr>
+              <tr *ngFor="let col of colegios | slice: (paginaActualCol - 1) * 10 : paginaActualCol * 10">
+                <td>
+                  <span>{{col[1]}}</span>
+                </td>
+                <td>
+                  <span>{{col[3]}}</span>
+                </td>
+                <td>
+                  <span>{{col[5]}}</span>
+                </td>
+                <td style="display:flex; flex-direction: column; text-align: center; justify-content: center; align-items: center;">
+                  <ion-button style="--border-radius: 50%; width: 50px; " color="danger"(click)="presentAlertBorrarCol(col[0])">
+                  <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                <ion-button style="--border-radius: 50%; width: 50px; " color="warning"(click)="buscarColegio(col[0], col[1])">
+                  <ion-icon name="search-outline"></ion-icon>
+                </ion-button>
+                </td>
+              </tr>
+            </table>
+            <section style="display: flex; flex-direction: column; text-align: center; justify-content: center;">
+              <section>
+                <ion-button (click)="paraAnadirCol()" class="custom-button" style="background-color: rgb(9, 0, 138); transition: background-color 0.3s; border-radius: 0; display: flex; justify-content: center; align-items: center;">
+                  <ion-icon name="add-outline"></ion-icon>
+                </ion-button>
+              </section>
+              <section style="display: flex; flex-direction: row; justify-content: center;">
+                <ion-button [disabled]="paginaActualCol === 1" (click)="paginaActualCol = paginaActualCol - 1"class="custom-button">
+                  Anterior
+                </ion-button>
+                <ion-button (click)="paginaActualCol = paginaActualCol + 1" class="custom-button" [disabled]="paginaActualCol * 10 >= colegios.length">
+                  Siguiente
+                </ion-button>
+              </section>
+            <section style="display: flex; flex-direction: row; justify-content: center;">
+              <ion-button (click)="onImprimirColegios()" class="custom-button">
+                Imprimir
+              </ion-button>
+            </section>
+          </section>
+        </section>
+        </section>
+
+        </section>
+
+
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

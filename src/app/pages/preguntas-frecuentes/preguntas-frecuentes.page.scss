@@ -1,0 +1,8 @@
+.button-color {
+    background-color:rgb(9, 0, 138); /* Color inicial del botón */
+    transition: background-color 0.3s; /* Transición suave */
+  }
+  
+  .button-color:hover {
+    background-color: rgb(219, 187, 2); /* Color al pasar el cursor */
+  }    

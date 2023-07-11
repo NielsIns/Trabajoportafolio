@@ -1,0 +1,62 @@
+<ion-content class="ion-content-perfil ic-2" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <div class="card-container">
+    <ion-card class="tamanio-card">
+      <ion-card-header>
+        <section class="responsive-section">
+          <!-- Agregar interpolación de nombre -->
+          <ion-title class="tamnio-letra" *ngIf="usuario.ID_TIPO_PERSONA == 1">Perfil Directivo</ion-title>
+          <ion-title class="tamnio-letra" *ngIf="usuario.ID_TIPO_PERSONA == 2">Perfil Apoderado</ion-title>
+          <ion-title class="tamnio-letra" *ngIf="usuario.ID_TIPO_PERSONA == 4">Perfil Administrador</ion-title>
+        </section>
+      </ion-card-header>
+      
+      <ion-item class="ion-item-mg item-background-color" style="height: 0%; width: 97%;"></ion-item>
+      
+      <ion-card-content>
+        <span style="margin-top: 1%; font-size: x-large !important; text-decoration: underline;">
+          <ion-title style="text-align: center; font-size: x-large !important;">Datos Usuario</ion-title>
+        </span>
+        
+        <div class="padding-a" style="display: flex; flex-direction: column !important;">
+          <div style="flex-direction: column;">
+            <section style="text-align: center !important;display: flex; flex-direction: column; flex-flow: column wrap">
+              <span style="font-size: large !important; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                <span style="font-weight: bold; color: black;">Nombre:</span> {{usuario.P_NOMBRE}} {{usuario.S_NOMBRE}} {{usuario.AP_PATERNO}} {{usuario.AP_MATERNO}}
+              </span>
+              <span style="font-size: large !important; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                <span style="font-weight: bold; color: black;">Correo:</span> {{usuario.CORREO}}
+              </span>
+              <span style="font-size: large !important; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                <span style="font-weight: bold; color: black;">Teléfono:</span> {{usuario.TELEFONO}}
+              </span>
+              <section *ngIf="usuario.ID_TIPO_PERSONA == 1">
+                <span style="font-size: large !important; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                  {{usuario.ID_CARGO}}
+                </span>
+              </section>
+            </section>
+          </div> 
+        </div>
+      </ion-card-content>
+      
+      <ion-item class="ion-item-mg item-background-color"></ion-item>
+      
+      <div class="carousel-container">
+        <div class="carousel">
+          <img src="../../../assets/icon/1.png" alt="Slide 1" style="width: 90%;">
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 10px;"></div>
+      
+      <!-- Botón para descargar el manual de usuario -->
+      <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <a id="download-link" href="../../../assets/manualusuario.pdf" download style="display: none;"></a>
+        <button class="button-color rounded-button" onclick="document.getElementById('download-link').click();">
+          <span style="padding: 5px;">Descargar Manual de Usuario</span>
+        </button>
+      </div>
+      
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="end"><img alt="logo" class="tamanio-logo" src="../../../assets/icon/LogoLSG.jpg"></ion-title>
+    <ion-button slot="start" fill="clear" routerLink="/login"><ion-icon name="arrow-back-outline" style="color: black;"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-content-2 ion-content-1" style="display:flex;align-items: center !important; justify-content: center !important;">
+  <div style="margin: 10px !important;">
+
+    <ion-card class="ion-card-ag" style="margin: 10px !important;">
+      <ion-card-header>
+        <ion-card-title style="text-align: center; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)" class="tamnio-letra">Registro Apoderado</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="credencial" (ngSubmit)="anadirUser()">
+          <ion-item>
+            <ion-label position="stacked" style="color: rgb(0, 0, 0);">Nombre Usuario</ion-label>
+            <ion-input type="text" placeholder="Ingrese su nombre de usuario" formControlName="NOM_USUARIO"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input type="password" placeholder="Ingrese su contraseña" formControlName="CONTRASENIA"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+        </form>
+        <form [formGroup]="user" (ngSubmit)="anadirUser()">
+          <ion-item>
+            <ion-label position="stacked">Rut</ion-label>
+            <ion-input type="text" placeholder="Ej: 11.111.111-1" formControlName="RUT"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Primer Nombre</ion-label>
+            <ion-input type="text" placeholder="Ej: John" formControlName="P_NOMBRE"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Segundo Nombre</ion-label>
+            <ion-input type="text" placeholder="Ej: Gerónimo" formControlName="S_NOMBRE"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Apellido Paterno</ion-label>
+            <ion-input type="text" placeholder="Ej: Doe" formControlName="AP_PATERNO"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Apellido Materno</ion-label>
+            <ion-input type="text" placeholder="Ej: Pérez" formControlName="AP_MATERNO"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Fecha Nacimiento</ion-label>
+            <ion-input type="text" placeholder="Ej: 11/12/1999" formControlName="FECHA_NAC"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input type="number" placeholder="Ej:987656571" formControlName="TELEFONO"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item> 
+            <ion-label position="stacked">Dirección</ion-label>
+            <ion-input type="text" placeholder="Ej: La Colonia 0114" formControlName="DIRECCION"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo Electronico</ion-label>
+            <ion-input type="text" placeholder="Ej: correo@correo.com" formControlName="CORREO"></ion-input>
+            <ion-note slot="error">Campo Obligatorio</ion-note>
+          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-select formControlName="ID_GENERO" interface="popover" placeholder="Selecciona un género">
+                <span *ngFor="let g of generos">
+                    <ion-select-option value="{{g.ID_GENERO}}"> 
+                      
+                        {{g.TIPO_GENERO}}
+                    
+                    </ion-select-option>
+                  
+                </span>
+                
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-select formControlName="ID_COMUNA" interface="popover" placeholder="Selecciona una comuna">
+                <span *ngFor="let c of comunas">
+                    <ion-select-option value="{{c.ID_COMUNA}}"> 
+                      
+                        {{c.NOM_COMUNA}}
+                    
+                    </ion-select-option>
+                  
+                </span>
+                
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          
+          <ion-list>
+            <ion-item>
+              <ion-select formControlName="ID_PROFESION" interface="popover" placeholder="Selecciona una profesión">
+                <span *ngFor="let p of profesiones">
+                    <ion-select-option value="{{p.ID_PROFESION}}"> 
+                      
+                        {{p.NOM_PROF}}
+                    
+                    </ion-select-option>
+                  
+                </span>
+                
+              </ion-select>
+            </ion-item>
+          </ion-list>
+  
+        </form>
+
+        
+        <ion-button (click)="anadirUser()" type="submit" class="button-color" >
+          Registrar
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
