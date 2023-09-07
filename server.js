@@ -11,7 +11,7 @@ const formidable = require('formidable');
 const sgMail = require('@sendgrid/mail')
 
 
-const API_KEY='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'
+
 
 
 // using Twilio SendGrid's v3 Node.js Library
@@ -2623,7 +2623,7 @@ app.use(express.json())
 async function enviarCorreo(destinatario, asunto, contenido) {
   const mensaje = {
     to: destinatario,
-    from: 'maticulaslsg@gmail.com',
+    from: 'lsgmatricula@gmail.com',
     subject: asunto,
     text:'Envio de credenciales',
     html: contenido
